@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TriStateCheckbos</title>
+    </h:head>
+    <h:body>
+        <!--MENU-->
+        <h:form id="menu">
+            <p:tabMenu activeIndex="3">
+                <p:menuitem value="InputSwitch" outcome="/vista/InputSwitch.xhtml"/>
+                <p:menuitem value="ToggletSwitch" outcome="/vista/ToggleSwitch.xhtml"/>
+                <p:menuitem value="SelectOneButton" outcome="/vista/SelectOneButton.xhtml"/>
+                <p:menuitem value="TriStateCheckbox" outcome="/vista/TriStateCheckbox.xhtml"/>
+                <p:menuitem value="InputGroup" outcome="/vista/InputGroup.xhtml"/>
+                <p:menuitem value="InputNumber" outcome="/vista/InputNumber.xhtml"/>
+            </p:tabMenu>                           
+        </h:form>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+    </h:body>
+    <h:form>
+        <p:growl id="growl" showDetail="true"/>  
+
+        <h:panelGrid id="triStateGrid" columns="2" cellpadding="5">  
+            <h:outputText value="Basic Usage: "/>  
+            <p:triStateCheckbox value="#{triStateCheckboxView.value1}"/>  
+
+            <h:outputText value="Ajax Behavior: "/>  
+            <p:triStateCheckbox id="ajaxTriState" value="#{triStateCheckboxView.value2}">  
+                <p:ajax event="change" update="growl" listener="#{triStateCheckboxView.addMessage}"/>  
+            </p:triStateCheckbox>  
+
+            <h:outputText value="Customs Icons: "/>  
+            <p:triStateCheckbox value="#{triStateCheckboxView.value3}" 
+                                stateTwoIcon="pi pi-plus" 
+                                stateThreeIcon="pi pi-minus"/>  
+
+            <h:panelGroup/>  
+            <p:triStateCheckbox value="#{triStateCheckboxView.value4}" itemLabel="Item Label"/>                  
+        </h:panelGrid>  
+
+        <p:commandButton value="Submit" process="triStateGrid" update="display" oncomplete="PF('dlg').show()" 
+                         style="margin-top:10px;"/>  
+
+        <p:dialog header="Selected Values" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+            <h:panelGrid id="display" columns="1" style="margin: 10px;">  
+                <h:outputText value="Value 1: #{triStateCheckboxView.value1}"/>  
+                <h:outputText value="Value 2: #{triStateCheckboxView.value2}"/>  
+                <h:outputText value="Value 3: #{triStateCheckboxView.value3}"/>  
+                <h:outputText value="Value 4: #{triStateCheckboxView.value4}"/>  
+            </h:panelGrid>  
+        </p:dialog>  
+    </h:form>
+</html>
+
