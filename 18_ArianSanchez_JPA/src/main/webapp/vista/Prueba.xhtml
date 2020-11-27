@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Prueba</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="msg"/>
+            <h:panelGrid columns="2">
+                <h:outputText value="basico"/>
+                <p:inputSwitch value="#{selectBooleanView.value1}"/>
+
+                <h:outputText value="ajax xd"/>
+                <p:inputSwitch value="#{selectBooleanView.value2}">
+                    <p:ajax listener="#{selectBooleanView.addMessage()}" update="msg"/>
+                </p:inputSwitch>
+            </h:panelGrid>
+
+            <p:commandButton value="subir" update="ver" oncomplete="PF('dialogo').show()" />
+
+            <p:dialog header="valores" modal="true" resizable="false" widgetVar="dialogo" />
+            <h:panelGrid columns="1" id="ver">
+                <h:outputText value="valor1: #{selectBooleanView.value1}" />
+                <h:outputText value="valor1: #{selectBooleanView.value1}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
